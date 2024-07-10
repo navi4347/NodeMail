@@ -10,7 +10,6 @@ const port = 8081;
 
 let connection;
 
-// Create a database connection
 async function createConnection() {
   connection = await mysql.createConnection({
     host: 'localhost',
@@ -20,15 +19,13 @@ async function createConnection() {
   });
 }
 
-// Function to generate chart images
 const generateChartImage = async (chartConfig) => {
-  const width = 350; // Reduced width for side-by-side display
-  const height = 350; // Reduced height for side-by-side display
+  const width = 350;
+  const height = 350;
   const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height });
   return await chartJSNodeCanvas.renderToDataURL(chartConfig);
 };
 
-// Function to create bar chart config
 const createBarChartConfig = (data) => {
   return {
     type: 'bar',
@@ -52,7 +49,6 @@ const createBarChartConfig = (data) => {
   };
 };
 
-// Function to create line chart config
 const createLineChartConfig = (data) => {
   return {
     type: 'line',
@@ -77,7 +73,6 @@ const createLineChartConfig = (data) => {
   };
 };
 
-// Connect to the database before starting the server
 createConnection().then(() => {
   console.log('Connected to the database');
   app.listen(port, () => {
@@ -90,7 +85,6 @@ createConnection().then(() => {
 app.use(express.json());
 app.use(cors());
 
-// Endpoint to fetch progress data
 app.get('/api/progress', async (req, res) => {
   try {
     const [rows] = await connection.execute('SELECT id, revenue, revenue_growth, active_customers, year FROM progress');
@@ -101,7 +95,6 @@ app.get('/api/progress', async (req, res) => {
   }
 });
 
-// Endpoint to send email
 app.post('/api/sendEmail', async (req, res) => {
   try {
     const [rows] = await connection.execute('SELECT id, revenue, revenue_growth, active_customers, year FROM progress');
@@ -152,7 +145,6 @@ app.post('/api/sendEmail', async (req, res) => {
         </thead>
         <tbody>`;
 
-    // Iterate over rows to add data to the table
     rows.forEach(progress => {
       tableContent += `
         <tr>
@@ -184,8 +176,8 @@ app.post('/api/sendEmail', async (req, res) => {
       port: 587,
       secure: false,
       auth: {
-        user: 'naveenkonda.dev@gmail.com', // Replace with your Gmail email address
-        pass: 'zfhd ezpu jvss mvdi' // Replace with your Gmail app password or account password
+        user: 'naveenkonda.dev@gmail.com',
+        pass: 'zfhd ezpu jvss mvdi'
       },
       tls: {
         rejectUnauthorized: false
@@ -193,11 +185,11 @@ app.post('/api/sendEmail', async (req, res) => {
     });
 
     let mailOptions = {
-      from: 'naveenkonda.dev@gmail.com', // Sender address
-      to: 'ramesh@percient.com', // Receiver address
-      cc: 'naveen.konda@percient.com', // CC address
-      subject: 'Revenue Data', // Subject line
-      html: tableContent // HTML content of the email
+      from: 'naveenkonda.dev@gmail.com',
+      to: 'naveen.konda@percient.com',
+      cc: 'naveen.konda@percient.com',
+      subject: 'Revenue Data',
+      html: tableContent
     };
 
     let info = await transporter.sendMail(mailOptions);
@@ -210,7 +202,6 @@ app.post('/api/sendEmail', async (req, res) => {
   }
 });
 
-// Function to send daily email
 const sendEmailDaily = async () => {
   try {
     const [rows] = await connection.execute('SELECT id, revenue, revenue_growth, active_customers, year FROM progress');
@@ -261,7 +252,6 @@ const sendEmailDaily = async () => {
         </thead>
         <tbody>`;
 
-    // Iterate over rows to add data to the table
     rows.forEach(progress => {
       tableContent += `
         <tr>
@@ -293,8 +283,8 @@ const sendEmailDaily = async () => {
       port: 587,
       secure: false,
       auth: {
-        user: 'naveenkonda.dev@gmail.com', // Replace with your Gmail email address
-        pass: 'zfhd ezpu jvss mvdi' // Replace with your Gmail app password or account password
+        user: 'naveenkonda.dev@gmail.com',
+        pass: 'zfhd ezpu jvss mvdi'
       },
       tls: {
         rejectUnauthorized: false
@@ -302,11 +292,11 @@ const sendEmailDaily = async () => {
     });
 
     let mailOptions = {
-      from: 'naveenkonda.dev@gmail.com', // Sender address
-      to: 'ramesh@percient.com', // Receiver address
-      cc: 'naveen.konda@percient.com', // CC address
-      subject: 'Revenue Data (Daily)', // Subject line for daily email
-      html: `${tableContent}` // HTML content of the email
+      from: 'naveenkonda.dev@gmail.com',
+      to: 'naveen.konda@percient.com',
+      cc: 'naveen.konda@percient.com',
+      subject: 'Revenue Data (Daily)',
+      html: `${tableContent}`
     };
 
     let info = await transporter.sendMail(mailOptions);
@@ -316,13 +306,11 @@ const sendEmailDaily = async () => {
   }
 };
 
-// Schedule cron job to send daily email at 11:00 AM daily
 cron.schedule('25 10 * * *', () => {
   console.log('Running cron job at 11:00 AM');
   sendEmailDaily();
 });
 
-// Endpoint to manually trigger sending daily email
 app.post('/api/sendDailyEmail', async (req, res) => {
   try {
     await sendEmailDaily();
