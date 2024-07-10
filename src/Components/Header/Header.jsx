@@ -63,7 +63,7 @@ export default function BackToTop(props) {
       <AppBar>
         <Toolbar>
           <Typography variant="h6" component="div">
-            Scroll to see button
+          Percient
           </Typography>
         </Toolbar>
       </AppBar>

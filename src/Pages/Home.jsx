@@ -31,7 +31,7 @@ function Home() {
     <Box>
     <Box display="flex" justifyContent="space-between" alignItems="center" px={2} py={1}>
     <Typography variant="h5" gutterBottom>
-        Progress
+      Revenue data 
       </Typography>
       <Button variant="contained" onClick={handleSendEmail} sx={{ marginLeft: 2, marginBottom: 2 }}>
         Send Email
