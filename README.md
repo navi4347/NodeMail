@@ -78,6 +78,6 @@ To configure email sending functionality:
     user: 'root',
     password: 'root',
     database: 'percient'
-    s
+    
     (table Name-> progress;)
     DataBase location src/Database/percient.sql
