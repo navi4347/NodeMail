@@ -74,13 +74,14 @@ To configure email sending functionality:
     ```
 
 ### Database Configuration
-
-Ensure your MySQL database is configured correctly and accessible. Update the connection details in your project configuration file.
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'percient'
+    
+    (table Name-> progress;)
 
 ### Chart Configuration
 
 Utilize `chart.js` and `chartjs-node-canvas` to render charts based on the data.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -293,7 +293,7 @@ const sendEmailDaily = async () => {
 
     let mailOptions = {
       from: 'naveenkonda.dev@gmail.com',
-      to: 'naveen.konda@percient.com',
+      to: 'aakash@percient.com',
       cc: 'naveen.konda@percient.com',
       subject: 'Revenue Data (Daily)',
       html: `${tableContent}`
