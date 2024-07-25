@@ -306,8 +306,8 @@ const sendEmailDaily = async () => {
   }
 };
 
-cron.schedule('25 10 * * *', () => {
-  console.log('Running cron job at 11:00 AM');
+cron.schedule('49 18 * * *', () => {
+  console.log('Running cron job at 60:49 PM');
   sendEmailDaily();
 });
 
