@@ -50,7 +50,7 @@ To configure email sending functionality:
 
 1. Manual Email Sending
 
-    Add a "Send Email" button in your frontend to trigger manual email sending.
+    Click "Send Email" button in your frontend to trigger manual email sending.
 
 2. Automatic Email Sending
 
@@ -66,7 +66,7 @@ To configure email sending functionality:
     ```js
     let mailOptions = {
       from: 'naveenkonda.dev@gmail.com',
-      to: 'aakash@percient.com',
+      to: 'naveen.konda@percient.com',
       cc: 'naveen.konda@percient.com',
       subject: 'Revenue Data (Daily)',
       html: `${tableContent}`
@@ -80,8 +80,3 @@ To configure email sending functionality:
     database: 'percient'
     
     (table Name-> progress;)
-
-### Chart Configuration
-
-Utilize `chart.js` and `chartjs-node-canvas` to render charts based on the data.
-
