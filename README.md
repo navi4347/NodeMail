@@ -80,5 +80,4 @@ To configure email sending functionality:
     database: 'percient'
     
     (table Name-> progress;)
-
-Import 
+    DataBase location src/Database/percient.sql
